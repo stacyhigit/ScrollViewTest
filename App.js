@@ -1,35 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from "expo-status-bar";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#232526', '#66686a']}
-        style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
-      />
-
-      <View style={{ position: 'absolute', bottom: 50, left: 0, right: 0, alignItems: 'center' }}>
-        <Image
-          style={{ width: 100, height: 100 }}
-          contentFit="contain"
-          source="https://raw.githubusercontent.com/expo/styleguide/main/common/logos/word-mark-logo.svg"
-        />
-      </View>
-
-      <Image
-        style={{ width: 200, height: 200 }}
-        contentFit="contain"
-        source="https://d33wubrfki0l68.cloudfront.net/554c3b0e09cf167f0281fda839a5433f2040b349/ecfc9/img/header_logo.svg"
-      />
-
-      <Text style={{ fontSize: 22, marginTop: 15, color: '#fff' }}>
-        New Architecture: <Text style={{ fontWeight: 'bold' }}>Enabled</Text>
-      </Text>
-
-      < StatusBar style="auto" />
+      <ScrollView contentOffset={{ x: 0, y: 500 }}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            { backgroundColor: "blue" },
+            pressed && styles.pressed,
+          ]}
+          onPressOut={() => console.log("onPressOut")}
+          onPress={() => console.log("onPress!")}
+          onPressIn={() => console.log("onPressIn")}
+        >
+          <Text style={styles.text}>test 1</Text>
+        </Pressable>
+      </ScrollView>
+      <ScrollView>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            { backgroundColor: "blue" },
+            pressed && styles.pressed,
+          ]}
+          onPressOut={() => console.log("onPressOut")}
+          onPress={() => console.log("onPress!")}
+          onPressIn={() => console.log("onPressIn")}
+        >
+          <Text style={styles.text}>test 2</Text>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 }
@@ -37,8 +41,31 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 100,
+  },
+  button: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    elevation: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 1, height: 1 },
+    shadowRadius: 2,
+    borderRadius: 8,
+  },
+  pressed: {
+    opacity: 0.7,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "white",
+    fontWeight: "bold",
+    textTransform: "uppercase",
   },
 });
